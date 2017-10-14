@@ -28,11 +28,14 @@
       vertical-align: top;
       margin: 10px
     }
+     .selected {
+       color: green
+     }
     </style>
   </head>
 
   <body ng-controller="MainCtrl">
-    <split-grid data="data" no-of-columns="2"></split-grid>
+    <split-grid data="data" no-of-columns="2" on-selection="bindFunct()"></split-grid>
     <div>testing</div>
   </body>
 </html>

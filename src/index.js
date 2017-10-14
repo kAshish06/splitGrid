@@ -5,7 +5,11 @@ var app = angular.module('plunker', []);
 app.controller('MainCtrl', function($scope) {
   $scope.name = 'World';
   $scope.data = ['sksjdhdskfhdfihghgvuhaiuhhjvuhdfkjgvsdfkj', 'Ashish', 'Ankit', 'Sachin', 'Sneha',
-  'Rajesh', 'Amit', 'Mayur', 'Smit', 'Sumit', 'Vani', 'Dhaval', 'Amod', 'Jitin', 'Piyush', 'Rahul']
+  'Rajesh', 'Amit', 'Mayur', 'Smit', 'Sumit', 'Vani', 'Dhaval', 'Amod', 'Jitin', 'Piyush', 'Rahul'];
+
+  $scope.bindFunct = () => {
+    console.log('Bind func');
+  }
 });
 
 app.directive('splitGrid', function($window) {
@@ -13,13 +17,14 @@ app.directive('splitGrid', function($window) {
     restrict: 'E',
     scope: {
       data: '=',
-      noOfColumns: '@'
+      noOfColumns: '@',
+      onSelection: '&'
     },
     template: `
       <div class="container">
         <div class="inline-div" ng-repeat="column in columns" ng-style="columnWidth">
           <ul>
-            <li class="list" ng-repeat="item in column.data">{{item}}</li>
+            <li class="list" ng-repeat="item in column.data" ng-click="toggleSelection(item, $index);onSelection()" ng-class="{{item.selected}} ? 'selected' : ''">{{item.data}}</li>
           </ul>
         </div>
       </div>
@@ -37,7 +42,7 @@ app.directive('splitGrid', function($window) {
               columnObject.data = [];
               scope.columns.push(columnObject);
             };
-          }
+          };
           let decideWidth = () => {
             let colWidth = 90/parseInt(scope.noOfColumns, 10);
             scope.columnWidth = {
@@ -50,11 +55,12 @@ app.directive('splitGrid', function($window) {
                 createColumns();
                 for(let i = 0; i <= scope.data.length;) {
                   let j = 0;
-                  debugger;
                   for(j; j < scope.columns.length; j++) {
-                    let data = scope.data[i+j];
-                    if(data !== undefined) {
-                      scope.columns[j].data.push(data);
+                    let dataObj = {}; 
+                    dataObj.data = scope.data[i+j];
+                    dataObj.selected = false;
+                    if(dataObj.data !== undefined) {
+                      scope.columns[j].data.push(dataObj);
                     };
                     
                   }
@@ -62,7 +68,17 @@ app.directive('splitGrid', function($window) {
                 }
               }
             }
-          })
+          });
+          scope.toggleSelection = (index, i) => {
+            console.log(index);
+            console.log(i)
+            angular.forEach(scope.columns, (val, ind) => {
+              if(val.data.includes(index)) {
+                console.log(ind)
+                val.data[i].selected = !val.data[i].selected;
+              }
+            })
+          }
           //createColumns();
         }
       }
