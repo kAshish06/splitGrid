@@ -1,0 +1,14 @@
+<div style="position: relative; margin: 10px">
+  <input type="text" class="dd-text" ng-model="selectedValue"
+  ng-click="textBoxClickHandler()" ng-blur="hideList($event)"
+  ng-style="ddText"/>
+  <div ng-show="showList" class="drop-panel" ng-style="dropPanel">
+    <ul class="list-parent" ng-style="listParent">
+      <li class="dd-list list-active">Select A Value</li>
+      <li class="dd-list" ng-repeat="item in ddData" title="{{item}}" ng-mousedown="listClickHandler(item)">{{item}}</li>
+    </ul>
+  </div>
+  <span class="dd-icon">
+    <i class="fa fa-caret-down"></i>
+  </span>
+</div>

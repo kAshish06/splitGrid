@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html ng-app="plunker">
+
+  <head>
+    <meta charset="utf-8" />
+    <title>AngularJS Plunker</title>
+    <script>document.write('<base href="' + document.location + '" />');</script>
+    <script src="superdropdown.js"></script>
+    <style>
+    /* Put your css in here */
+    ul {
+      list-style: none
+    }
+    .container {
+      box-sizing: border-box;
+      width: 100%;
+      padding: 5%;
+    }
+
+    .list {
+      border: 1px solid grey;
+      background-color: #f2f2f2;
+      padding: 10px;
+      margin-top: 10px;
+    }
+    .inline-div {
+      display:inline-block;
+      vertical-align: top;
+      margin: 10px
+    }
+    </style>
+  </head>
+
+  <body ng-controller="MainCtrl">
+    <split-grid data="data" no-of-columns="2"></split-grid>
+    <div>testing</div>
+  </body>
+</html>
